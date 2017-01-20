@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Local weather</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/weather-icons.min.css">
+</head>
+<body>
+<div class="container">
+
+ <div class="row">
+  <div class="text-center col-xs-9">
+    <div class="well">
+      <h1>What's the weather like?</h1>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <div class="text-center well">
+      <input id="searchCity" type="text" placeholder="Search City"><button id="newQuery">Submit</button>
+
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="options" id="selectCelsius" autocomplete="off"> Metric
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="options" id="selectFahrenheit" autocomplete="off"> Imperial
+        </label>
+    </div>
+    </div>
+
+  </div>
+ </div>
+
+  <div class="row">
+    <div class="location col-xs-4 well">
+      <ul id="loc"></ul>
+    </div>
+    <div class="col-xs-4 text-center well">
+      <h1 id="weatherName">loading</h1><br>
+      <div><i id="icon" class="wi wi-degrees"></i></div>
+
+    </div>
+    <div class="col-xs-4 well">
+      <ul id="weather"></ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
