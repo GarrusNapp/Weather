@@ -10,8 +10,6 @@ $(document).ready(function() {
     console.log("called");
     var lat = position.coords.latitude.toFixed(2);//
     var lon = position.coords.longitude.toFixed(2);//
-    //$(".loc").append("<li>Latitude: "+ lat +"</li>");
-    //$(".loc").append("<li>Longitude: "+ lon +"</li>");
     callAPI(lat,lon);
   }
 
@@ -69,13 +67,12 @@ $(document).ready(function() {
     var currentWeather = data.weather[0].description;
 
 
-
     $("#loc").append("<li>Country: "+ data.sys.country +"</li>");
     $("#loc").append("<li>City: "+ data.name +"</li>");
-    $("#weather").append("<li>Humidity: "+ data.main.humidity +" %</li>");
-    $("#weather").append("<li>Pressure: "+ data.main.pressure +" hPa</li>");
     $("#weather").append("<li id=\"temp\">Temperature: "+ temperature.toFixed(2) +" &deg"+ tempUnit +"</li>");
     $("#weather").append("<li>Wind: "+ speed +" "+ speedUnit +"</li>");
+    $("#weather").append("<li>Humidity: "+ data.main.humidity +" %</li>");
+    $("#weather").append("<li>Pressure: "+ data.main.pressure +" hPa</li>");
     $("#icon").attr("class", "wi "+ icon);
     $("#weatherName").html(currentWeather);
 
