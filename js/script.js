@@ -2,19 +2,19 @@ $(document).ready(function() {
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(locate, error);
-  } else {
+  }
+  else {
     error();
   }
 
   function locate(position){
-    console.log("called");
-    var lat = position.coords.latitude.toFixed(2);//
-    var lon = position.coords.longitude.toFixed(2);//
+    var lat = position.coords.latitude.toFixed(2);
+    var lon = position.coords.longitude.toFixed(2);
     callAPI(lat,lon);
   }
 
   function error() {
-    console.log("Couldn't find your location.");
+    alert("Couldn't find your location.");
   }
 
 
@@ -23,19 +23,16 @@ $(document).ready(function() {
 
     if (city) {
       $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid="+ key, function(json){
-        console.log("OK");
         jsonGlobal = json;
         filler(json, false);
       });
     }
     else{
-    $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat="+ x +"&lon="+ y +"&appid="+ key, function(json){
-      console.log("OK");
-      jsonGlobal = json;
-      filler(json, false);
-    });
+      $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat="+ x +"&lon="+ y +"&appid="+ key, function(json){
+        jsonGlobal = json;
+        filler(json, false);
+      });
     }
-
   }
 
   function filler(data, imperial) {
@@ -62,10 +59,10 @@ $(document).ready(function() {
     else {
       var icon = "wi-owm-night-"+ data.weather[0].id;
     }
+
     var backgroundSelect = {"2": "storm", "3": "rain", "5": "rain", "6": "snowing"};
     var background = backgroundSelect[data.weather[0].id.toString()[0]];
     var currentWeather = data.weather[0].description;
-
 
     $("#loc").append("<li>Country: "+ data.sys.country +"</li>");
     $("#loc").append("<li>City: "+ data.name +"</li>");
@@ -82,25 +79,21 @@ $(document).ready(function() {
     else {
       $(".container").css("background-image", "url(./images/clouds.jpg)");
     }
-
   }
 
   $("#selectCelsius").click(function(){
       filler(jsonGlobal, false);
       $(this).parent().addClass("active");
       $("#selectFahrenheit").parent().removeClass("active");
-
   });
 
   $("#selectFahrenheit").click(function(){
       filler(jsonGlobal, true);
       $(this).parent().addClass("active");
       $("#selectCelsius").parent().removeClass("active");
-
   });
 
   $("#newQuery").click(function(){
-    console.log("NQCLICK");
     var query = $("#searchCity").val();
     if (query){
       callAPI(0,0,query);
@@ -108,5 +101,4 @@ $(document).ready(function() {
     $("#searchCity").val("");
 
   });
-
 });
