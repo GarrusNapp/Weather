@@ -10,6 +10,16 @@ body {
   margin-bottom: 10px;
 }
 
+.header {
+  font-family: Lobster;
+  font-size: 4em;
+  padding: 3px;
+}
+
+#newQuery {
+  margin-top: 3px;
+}
+
 #searchCity {
   width: 90%;
   border-style: solid;
@@ -18,7 +28,7 @@ body {
 }
 
 .btn-group {
-  margin-top: 10px;
+  margin-top: 3px;
 }
 
 .container {
