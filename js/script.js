@@ -13,26 +13,32 @@ $(document).ready(function() {
     callAPI(lat,lon);
   }
 
-  function error() {
-    alert("Couldn't find your location.");
+  function error(error) {
+    alert("Couldn't find your location. Error: " + error.message);
   }
 
 
   function callAPI(x,y,city) {
     var key="5485b391b286983dc7b50452adcb9c23";
-
+    // if city is provided the url changes
     if (city) {
-      $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid="+ key, function(json){
-        jsonGlobal = json;
-        filler(json, false);
-      });
+      var url = "https://api.openweathermap.org/data/2.5/weather?q="+ city +"&appid="+ key;
     }
-    else{
-      $.getJSON("https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat="+ x +"&lon="+ y +"&appid="+ key, function(json){
-        jsonGlobal = json;
-        filler(json, false);
-      });
+    else {
+      var url = "https://api.openweathermap.org/data/2.5/weather?lat="+ x +"&lon="+ y +"&appid="+ key;
     }
+
+    $.ajax({
+      url: url,
+    })
+    .done(function(json){
+      jsonGlobal = json; //creating a global variable here for celsius/fahrenheit buttons to access that
+      filler(json, false);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown){
+      alert(errorThrown);
+      console.log(errorThrown);
+    })
   }
 
   function filler(data, imperial) {
@@ -45,6 +51,7 @@ $(document).ready(function() {
     var speedImperial = speed/0.44704
     var tempUnit = "C";
     var speedUnit = "m/s"
+    var time = new Date().getHours();
 
     if (imperial == true) {
       var temperature = fahrenheit;
@@ -52,7 +59,7 @@ $(document).ready(function() {
       var speed = speedImperial.toFixed(2);
       var speedUnit = "MPH";
     }
-    var time = new Date().getHours();
+
     if (time >= 6 && time <= 22) {
       var icon = "wi-owm-day-"+ data.weather[0].id;
     }
@@ -64,12 +71,14 @@ $(document).ready(function() {
     var background = backgroundSelect[data.weather[0].id.toString()[0]];
     var currentWeather = data.weather[0].description;
 
-    $("#loc").append("<li>Country: "+ data.sys.country +"</li>");
-    $("#loc").append("<li>City: "+ data.name +"</li>");
-    $("#weather").append("<li id=\"temp\">Temperature: "+ temperature.toFixed(2) +" &deg"+ tempUnit +"</li>");
-    $("#weather").append("<li>Wind: "+ speed +" "+ speedUnit +"</li>");
-    $("#weather").append("<li>Humidity: "+ data.main.humidity +" %</li>");
-    $("#weather").append("<li>Pressure: "+ data.main.pressure +" hPa</li>");
+    $("#loc")
+      .append("<li>Country: "+ data.sys.country +"</li>")
+      .append("<li>City: "+ data.name +"</li>");
+    $("#weather")
+      .append("<li id=\"temp\">Temperature: "+ temperature.toFixed(2) +" &deg"+ tempUnit +"</li>")
+      .append("<li>Wind: "+ speed +" "+ speedUnit +"</li>")
+      .append("<li>Humidity: "+ data.main.humidity +" %</li>")
+      .append("<li>Pressure: "+ data.main.pressure +" hPa</li>");
     $("#icon").attr("class", "wi "+ icon);
     $("#weatherName").html(currentWeather);
 
