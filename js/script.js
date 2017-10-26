@@ -36,8 +36,7 @@ $(document).ready(function() {
       filler(json, false);
     })
     .fail(function(jqXHR, textStatus, errorThrown){
-      alert(errorThrown);
-      console.log(errorThrown);
+      alert("Error, try again later.");
     })
   }
 
