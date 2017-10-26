@@ -11,4 +11,4 @@ User Stories:
 3. I can push a button to toggle between Fahrenheit and Celsius.
 4. I can check weather in a different city.
 
-Since API is over HTTP, https://cors-anywhere.herokuapp.com is used to sort that out.
+
