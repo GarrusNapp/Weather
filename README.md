@@ -2,7 +2,7 @@
 View live - https://garrusnapp.github.io/weather/
 
 
-Project for FCC - using open weather map API. 
+Project for FCC - using open weather map API.
 
 User Stories:
 
@@ -10,5 +10,3 @@ User Stories:
 2. I can see a different icon or background image (e.g. snowy mountain, hot desert) depending on the weather.
 3. I can push a button to toggle between Fahrenheit and Celsius.
 4. I can check weather in a different city.
-
-Since API is over HTTP, https://cors-anywhere.herokuapp.com is used to sort that out.
