@@ -10,8 +10,3 @@ User Stories:
 2. I can see a different icon or background image (e.g. snowy mountain, hot desert) depending on the weather.
 3. I can push a button to toggle between Fahrenheit and Celsius.
 4. I can check weather in a different city.
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/master
